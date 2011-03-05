@@ -3,7 +3,6 @@
 //
 
 #import "DBPrefsWindowController.h"
-#import "WLClosableWindow.h"
 
 
 static DBPrefsWindowController *_sharedPrefsWindowController = nil;
@@ -35,6 +34,14 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 	// Subclasses can override this to use a nib with a different name.
 {
    return @"Preferences";
+}
+
+
+
+
++ (Class)windowClass
+{
+    return [NSWindow class];
 }
 
 
@@ -77,12 +84,12 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 		// Create a new window to display the preference views.
 		// If the developer attached a window to this controller
 		// in Interface Builder, it gets replaced with this one.
-	NSWindow *window = [[[WLClosableWindow alloc] initWithContentRect:NSMakeRect(0,0,1000,1000)
-												    styleMask:(NSTitledWindowMask |
-															   NSClosableWindowMask |
-															   NSMiniaturizableWindowMask)
-													  backing:NSBackingStoreBuffered
-													    defer:YES] autorelease];
+	NSWindow *window = [[[[[self class] windowClass] alloc] initWithContentRect:NSMakeRect(0,0,1000,1000)
+                                                                      styleMask:(NSTitledWindowMask |
+                                                                                 NSClosableWindowMask |
+                                                                                 NSMiniaturizableWindowMask)
+                                                                        backing:NSBackingStoreBuffered
+                                                                          defer:YES] autorelease];
 	contentSubview = [[[NSView alloc] initWithFrame:[[window contentView] frame]] autorelease];
 	[contentSubview setAutoresizingMask:(NSViewMinYMargin | NSViewWidthSizable)];
 	[[window contentView] addSubview:contentSubview];

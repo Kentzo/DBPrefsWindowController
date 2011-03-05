@@ -57,6 +57,7 @@
 
 + (DBPrefsWindowController *)sharedPrefsWindowController;
 + (NSString *)nibName;
++ (Class)windowClass;
 
 - (void)setupToolbar;
 - (void)addView:(NSView *)view label:(NSString *)label;
